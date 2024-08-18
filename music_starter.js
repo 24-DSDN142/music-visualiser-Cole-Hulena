@@ -3,9 +3,12 @@ let firstrun = true;
 let inverted = false;
 let currentFrame = 0;
 const frames = [];
+const bananaFrames = [];
 const xPos = [1152, 1080, 1008, 936, 864, 792, 720, 648, 576, 504, 432, 360, 288, 216, 144, 72, 0, -72, -144];
-const invertedxPos= [-138, -264, -390, -516, -642, -768, -894, -1020, -1146, -1272, -1398, -1524, -1650, -1776, -1902, -2028, -2154, -2280, -2406, -2532
-];
+const invertedxPos= [-138, -264, -390, -516, -642, -768, -894, -1020, -1146, -1272, -1398, -1524, -1650, -1776, -1902, -2028, -2154, -2280, -2406, -2532];
+
+
+
 const centerX = 720;
 const centerY = 410;
 // vocal, drum, bass, and other are volumes ranging from 0 to 100
@@ -33,8 +36,17 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
     frames.push(loadImage('assets/4.png'));
     frames.push(loadImage('assets/5.png'));
 
-    banana = loadImage('assets/banana.png');
-    hat = loadImage('assets/hat.png');
+    bananaFrames.push(loadImage('assets/B1'));
+    bananaFrames.push(loadImage('assets/B2'));
+    bananaFrames.push(loadImage('assets/B3'));
+    bananaFrames.push(loadImage('assets/B4'));
+    bananaFrames.push(loadImage('assets/B5'));
+    bananaFrames.push(loadImage('assets/B6'));
+    bananaFrames.push(loadImage('assets/B7'));
+    bananaFrames.push(loadImage('assets/B8'));
+
+    // banana = loadImage('assets/banana.png');
+    // hat = loadImage('assets/hat.png');
     
     firstrun = false;
   }
@@ -54,10 +66,10 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
     inverted = false;
   }
   
-  bananaBarY(other, centerX); //tracks other 
-  bananaBarX(bass, centerY); // tracks bass
+  //otherSound(other);
 
-  drawHat(vocal); // tracks vocal
+  //bananaBarY(other, centerX); //tracks other 
+  //bananaBarX(bass, centerY); // tracks bass
  
   
   if(counter % 5 == 1) {
@@ -104,14 +116,12 @@ function bananaBarX(track, yPosition) {
   }
 }
 
+function otherSound(input){
+  inputVol = map(input, 0, 100, 0, 7);
+  drawBanana(inputVol);
 
-function drawHat(track) {
-  let trackMap = map(track, 0 , 100, 0.1, 1);
-  push();
-  imageMode(CENTER);
-  image(hat, 950, 600);
-  pop();
 }
+
 
 function drawMonkey(frame){
   if(!inverted){
@@ -122,6 +132,10 @@ function drawMonkey(frame){
     image(frames[frame],invertedxPos[frame], -180); 
     pop();
   }
+}
+
+function drawBanana(frame){
+  image(bananaFrames[frame], centerX, centerY);
 }
 
 
