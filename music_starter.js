@@ -55,7 +55,7 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
   }
   background(8, 14, 75, 50)//background colour 
   textFont(myFont); // please use CSS safe fonts
-  //rectMode(CENTER)
+  //rectMode(CENTER)  
   
   if(counter > 4250 && counter < 4550){
     inverted = true;
@@ -155,14 +155,12 @@ function drawMonkey(frame){
 
 function drawStarVocal(y , input){
   let size;
-  if(input >= 20 && input <= 50){
-  size = map(input, 20, 50, 1, 10);
-  }else if(input >= 40 && input <= 80){
-    size = map(input, 40, 80, 10, 40);
+  if(input >= 20 && input <= 80){
+  size = map(input, 20, 80, 1, 30);
   }else if(input < 20 ){
     size = 1;
   }else{
-    size = 40;
+    size = 30;
   }
 
   //increase x
@@ -171,15 +169,13 @@ function drawStarVocal(y , input){
   }else{
     star1X = 0;
   }
-  
+
 
   //draw star
   push();
-  ellipseMode(CENTER);
+  noStroke();
   fill(255);
   ellipse(star1X, y, size, size);
-  fill(50);
-  ellipse(star1X, y, size/2, size/2);
   pop();
 }
 function drawStarBass(y , input){
@@ -202,6 +198,7 @@ function drawStarBass(y , input){
 
   //draw star
   push();
+  noStroke();
   fill(255);
   ellipse(star2X, y, size, size);
   pop();
@@ -226,10 +223,9 @@ function drawStarOther(y , input){
 
   //draw star
   push();
+  noStroke();
   fill(255);
   ellipse(star3X, y, size, size);
   pop();
 }
-
-
 
