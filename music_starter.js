@@ -12,6 +12,7 @@ const xPos = [1152, 1080, 1008, 936, 864, 792, 720, 648, 576, 504, 432, 360, 288
 const invertedxPos= [-138, -210, -282, -354, -426, -498, -570, -642, -714, -786, -858, -930, -1002, -1074, -1146, -1218, -1290, -1362, -1434, -1506];
 let myFont;
 let targetSize = 0;
+let bg;
 
 
 const centerX = 720;
@@ -50,11 +51,22 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
     bananaFrames.push(loadImage('assets/B7.png'));
     bananaFrames.push(loadImage('assets/B8.png'));
 
+    bg = loadImage('assets/bgSky.jpeg');
+
+    background(0);
+
+    image(bg, 0, 0, 1440, 820);
+
     myFont = loadFont('assets/ScriptMTBold.ttf');
     
     firstrun = false;
   }
-  background(8, 14, 75, 50)//background colour 
+  //background(8, 14, 75, 50)//background colour 
+  push();
+  tint(255, 50);
+  image(bg, 0, 0, 1440, 820);
+  pop();
+
   textFont(myFont); // please use CSS safe fonts
   //rectMode(CENTER)  
   
@@ -114,6 +126,8 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
    
 
   test(bass);
+
+
 }
 
 function drawDrum(input, count){
