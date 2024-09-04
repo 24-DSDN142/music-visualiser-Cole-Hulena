@@ -4,13 +4,14 @@ let inverted = false;
 let currentFrame = 0;
 let lastDrawnFrame = 0;
 let star1X = 0;
-let star2X = 720;
-let star3X = 1100;
+let star2X = 90;
+let star3X = 180;
 const frames = [];
 const bananaFrames = [];
 const xPos = [1152, 1080, 1008, 936, 864, 792, 720, 648, 576, 504, 432, 360, 288, 216, 144, 72, 0, -72, -144];
 const invertedxPos= [-138, -210, -282, -354, -426, -498, -570, -642, -714, -786, -858, -930, -1002, -1074, -1146, -1218, -1290, -1362, -1434, -1506];
 let myFont;
+let targetSize = 0;
 
 
 const centerX = 720;
@@ -75,8 +76,8 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
   }
 
   drawStarVocal(40, bass);
-  drawStarBass(400, vocal);
-  drawStarOther(780, other);
+  drawStarBass(70, vocal);
+  drawStarOther(100, other);
 
   //draw bananas
   drawDrum(drum, counter);
@@ -112,7 +113,7 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
   }
    
 
-
+  test(bass);
 }
 
 function drawDrum(input, count){
@@ -152,15 +153,14 @@ function drawMonkey(frame){
 //1440 x
 
 // 820 y
-
 function drawStarVocal(y , input){
   let size;
   if(input >= 20 && input <= 80){
-  size = map(input, 20, 80, 1, 30);
+  size = map(input, 20, 80, 1, 20);
   }else if(input < 20 ){
     size = 1;
   }else{
-    size = 30;
+    size = 20;
   }
 
   //increase x
@@ -168,6 +168,10 @@ function drawStarVocal(y , input){
     star1X += 2;
   }else{
     star1X = 0;
+  }
+
+  if(inverted){
+    y += 700;
   }
 
 
@@ -195,6 +199,9 @@ function drawStarBass(y , input){
     star2X = 0;
   }
 
+  if(inverted){
+    y += 700;
+  }
 
   //draw star
   push();
@@ -220,12 +227,27 @@ function drawStarOther(y , input){
     star3X = 0;
   }
   
+  if(inverted){
+    y += 700;
+  }
 
   //draw star
   push();
   noStroke();
   fill(255);
   ellipse(star3X, y, size, size);
+  pop();
+}
+
+function test(input){
+  push();
+  //noFill();
+  stroke(10);
+  fill(0, 10);
+  input = map(input,0, 100, 1300, 1600);
+  targetSize = lerp(targetSize ,input, 0.5);
+  // 1300 // 1600
+  circle(windowWidth/2, windowHeight/2, targetSize);
   pop();
 }
 
